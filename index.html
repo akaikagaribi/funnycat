@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наш самый крутой вебсайт</title>
+    <style>
+        * {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 45px;
+            font-weight: bold;
+        }
+        body {
+            display: flex;
+            flex-direction: column-reverse;
+            background-image: url(dirt.jpg);
+            background-size: cover;
+            margin: 0;
+        }
+        #mouse {
+            width: 20vh;
+            position: relative;
+            /* top: 150px; */
+            /* left: 600px; */
+        }
+        article {
+            display: flex;
+        }
+        #cat {
+            height: 30vh;
+            position: absolute;
+            /* left: 2160px; */
+        }
+        #sky {
+            width: 500vh;
+            height: 23vh;
+        }
+    </style>
+</head>
+<body>
+    <!--<article id="header_block"></article>-->
+    <article class="block_mouse" id="mouse_block">
+        <img id="mouse" src="mouse.png" alt="мышка">
+    </article>
+    <article class="block_cat" id="cat_block">
+        <img id="sky" src="sky.jpg" alt="sky">
+        <img id="cat" src="cat.png" alt="Котик">
+    </article>
+</body>
+<script>
+    let block = document.getElementById("header_block");
+    let cat = document.getElementById("cat");
+    let mouse = document.getElementById("mouse");
+    let mouse_block = document.getElementById("mouse_block");
+    let cat_block = document.getElementById("cat_block");
+    let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    let mx = 0;
+    let my = 0;
+    let mdx = 10;
+    let mdy = 10;
+
+    // const texts = [
+    //     'Я не ленивый, я просто в режиме экономии энергии!',
+    //     'Если жизнь дает лимоны, сделай лимонад. А если не дает — просто купи!',
+    //     'Я не опаздываю, я просто создаю эффект неожиданности.',
+    //     'У меня есть план: ничего не делать и наслаждаться этим!',
+    //     'Секрет счастья — это не искать его, а просто не терять из виду пиццу.',
+    //     'Я не гений, но иногда у меня бывают блестящие идеи... особенно во сне.',
+    //     'Если бы у меня был доллар за каждую глупую мысль, я бы, вероятно, потратил их на что-то глупое.',
+    //     'Я не старею, я просто становлюсь винтажным.',
+    //     'Мой внутренний голос говорит мне, что я могу все. Но мой внешний голос говорит: \'Сначала позавтракай!\'',
+    //     'Жизнь — это как компьютерная игра: иногда нужно просто перезагрузиться!'
+    // ]
+    // setInterval(() => {
+    //     block.innerHTML = texts[Math.floor(Math.random() * 10)];
+    // }, 3000)
+
+    setInterval(() => {
+        mouse.style.left = `${mx}px`;
+        mouse.style.top = `${my}px`;
+        if (my + mdy > vh - cat_block.scrollHeight - mouse.scrollHeight || my + mdy < 0) {
+            mdy = -mdy;
+        }
+        if (mx + mdx > vw - mouse.scrollWidth - 10 || mx + mdx < 0) {
+            mdx = -mdx;
+        }
+        mx += mdx;
+        my += mdy;
+        cat.style.left = `${mx - Math.floor(mx / vw * (cat.scrollWidth - mouse.scrollWidth))}px`;
+    }, 16)
+    // let step = 0
+    // document.addEventListener("keydown", function(event) {
+    //     if(event.code == "ArrowLeft") {
+    //         if(step > 0) {
+    //             step -= 10
+    //             cat.style.left = `${step}px`
+    //         }
+    //     }
+    //     if(event.code == "ArrowRight") {
+    //         if(step < 2160) {
+    //             step += 10
+    //             cat.style.left = `${step}px`
+    //         }
+    //     }
+    // })
+</script>
+</html>
